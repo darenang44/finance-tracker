@@ -2,10 +2,13 @@ Rails.application.routes.draw do
   devise_for :users
   root 'welcome#index'
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get 'my_portfolio', to: 'users#my_portfolio'
+  get 'search_stocks', to: 'stocks#search'
+
 end
 
 
+# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 # new_user_session GET    /users/sign_in(.:format)       devise/sessions#new
 #             user_session POST   /users/sign_in(.:format)       devise/sessions#create
 #     destroy_user_session DELETE /users/sign_out(.:format)      devise/sessions#destroy
