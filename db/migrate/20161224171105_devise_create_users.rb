@@ -1,3 +1,5 @@
+# we wanna add first and last name to users
+# in the command line we want to do rails generate migration add_first_and_last_name_to_users
 class DeviseCreateUsers < ActiveRecord::Migration[5.0]
   def change
     create_table :users do |t|

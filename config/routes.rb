@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  # , :controllers => { :registrations => "user/registrations" } is saying is the registrations path look through the controllers
+  # look that the user/registrations first the subclasses from devise 
+  devise_for :users, :controllers => { :registrations => "user/registrations" }
   resources :user_stocks, except: [:show, :edit, :update]
   root 'welcome#index'
 
