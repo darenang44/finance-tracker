@@ -36,4 +36,40 @@ class User < ApplicationRecord
     user_stocks.where(stock_id: stock.id).exists?
   end
 
+
+  def expect_current_user(users)
+    # we are looping through all the users and we are reject the instance where the user.id equals the current users id
+    users.reject { |user| user.id == self.id}
+  end
+
+  def not_friends_with?(friend_id)
+    # if the friend_id param doesnt show up atleast once then they are currently not friends
+    friendships.where(friend_id: friend_id).count < 1
+  end
+
+  def self.search(param)
+    return User.none if param.blank?
+
+    param.strip!
+    param.downcase!
+    (first_name_matches(param) + last_name_matches(param) + email_matches(param)).uniq
+  end
+
+  def self.first_name_matches(param)
+    matches('first_name', param)
+  end
+
+  def self.last_name_matches(param)
+    matches('last_name', param)
+  end
+
+  def self.email_matches(param)
+    matches('email', param)
+  end
+
+  def self.matches(field_name, param)
+    # "%#{param}%" - % is a wildcard saying that the search doeant have to be an exact match
+    where("lower(#{field_name}) like ?", "%#{param}%")
+  end
+
 end

@@ -10,7 +10,8 @@ class UsersController < ApplicationController
 
   def search
     # we are going to find the user/friend by the search_params which is the input given in our search bar
-    @users = User.search(params[:search_params])
+    # search method is a class level method defined in user.rb
+    @users = User.search(params[:search_param])
 
     if @users
       # we want all the users to show up expect our selves (current_user)
